@@ -1,0 +1,28 @@
+{
+  "name": "mediawiki-mcp-server",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "bin": {
+    "mediawiki-mcp-server": "./build/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "files": [
+    "build"
+  ],
+  "keywords": [],
+  "author": "",
+  "license": "",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.11.2",
+    "mwn": "^3.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.17",
+    "typescript": "^5.8.3"
+  }
+}
