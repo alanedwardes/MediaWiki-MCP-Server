@@ -2,15 +2,12 @@
 
 ## Setup
 
-Run `make install`
+```
+make install
+```
 
 ## Development
 
-Run:
-
 ```
-make build
-```
-```
-make run
+make dev
 ```

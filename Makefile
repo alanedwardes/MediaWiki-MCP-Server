@@ -1,16 +1,30 @@
-.PHONY: install update build test run
+.PHONY: install update build watch test lint run dev
+
+NODE_VERSION := 22
+
+ENTRYPOINT := build/index.js
 
 install:
-	docker run -it --rm -v "$(CURDIR)":/home/node/app -w /home/node/app -u node node:20 npm install
+	docker run -it --rm -v "$(CURDIR)":/home/node/app -w /home/node/app -u node node:$(NODE_VERSION) npm install
 
 update:
-	docker run -it --rm -v "$(CURDIR)":/home/node/app -w /home/node/app -u node node:20 npm update
+	docker run -it --rm -v "$(CURDIR)":/home/node/app -w /home/node/app -u node node:$(NODE_VERSION) npm update
 
 build:
-	docker run -it --rm -v "$(CURDIR)":/home/node/app -w /home/node/app -u node node:20 npm run build
+	docker run -it --rm -v "$(CURDIR)":/home/node/app -w /home/node/app -u node node:$(NODE_VERSION) npm run build
+
+watch:
+	docker run -it --rm -v "$(CURDIR)":/home/node/app -w /home/node/app -u node node:$(NODE_VERSION) npm run watch
 
 test:
-	docker run -it --rm -v "$(CURDIR)":/home/node/app -w /home/node/app -u node node:20 npm run test
+	docker run -it --rm -v "$(CURDIR)":/home/node/app -w /home/node/app -u node node:$(NODE_VERSION) npm run test
+
+lint:
+	docker run -it --rm -v "$(CURDIR)":/home/node/app -w /home/node/app -u node node:$(NODE_VERSION) npm run lint
 
 run:
-	docker run -it --rm -v "$(CURDIR)":/home/node/app -w /home/node/app -u node node:20 node build/index.js
+	docker run -it --rm -v "$(CURDIR)":/home/node/app -w /home/node/app -u node node:$(NODE_VERSION) node build/index.js
+
+dev: build
+	docker run -d --name mcp_server_watcher --rm -v "$(CURDIR)":/home/node/app -w /home/node/app -u node node:$(NODE_VERSION) npm run watch
+	npx -y @modelcontextprotocol/inspector node $(ENTRYPOINT)
