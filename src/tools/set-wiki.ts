@@ -1,7 +1,3 @@
-// TODO: Take any wiki URL and resolve it to the base URL
-// TODO: Validate whether the wiki server is valid
-// TODO: Discover article and script paths based on wiki server
-
 import { z } from 'zod';
 /* eslint-disable n/no-missing-import */
 import type { McpServer, RegisteredTool } from '@modelcontextprotocol/sdk/server/mcp.js';
@@ -12,18 +8,18 @@ import { makeApiRequest, fetchPageHtml } from '../common/utils.js';
 
 const COMMON_SCRIPT_PATHS = [ '/w', '/' ];
 
-// TODO: Perhaps move these types to a separate file? But they're not used anywhere else.
-interface MediaWikiSiteInfoGeneral {
+// TODO: Move these types to a dedicated file if we end up using Action API types elsewhere
+interface MediaWikiActionApiSiteInfoGeneral {
 	scriptpath: string;
 	articlepath: string;
 }
 
-interface MediaWikiSiteInfoQuery {
-	general: MediaWikiSiteInfoGeneral;
+interface MediaWikiActionApiSiteInfoQuery {
+	general: MediaWikiActionApiSiteInfoGeneral;
 }
 
-interface MediaWikiApiResponse {
-	query?: MediaWikiSiteInfoQuery;
+interface MediaWikiActionApiResponse {
+	query?: MediaWikiActionApiSiteInfoQuery;
 }
 
 interface WikiPathsResult {
@@ -134,7 +130,7 @@ async function getWikiPathsFromApi(
 	};
 
 	try {
-		const data = await makeApiRequest<MediaWikiApiResponse>( baseUrl, params );
+		const data = await makeApiRequest<MediaWikiActionApiResponse>( baseUrl, params );
 
 		const scriptpath = data?.query?.general?.scriptpath;
 		const articlepath = data?.query?.general?.articlepath;
