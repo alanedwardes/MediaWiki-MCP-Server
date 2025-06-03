@@ -7,6 +7,7 @@
 		"@wmde/wikimedia-typescript"
 	],
 	"rules": {
-		"no-shadow": "off"
+		"no-shadow": "off",
+		"es-x/no-hashbang": "off"
 	}
 }
