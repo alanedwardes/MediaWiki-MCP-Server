@@ -65,5 +65,5 @@ app.delete( '/mcp', handleSessionRequest );
 
 const PORT = process.env.PORT || 3000;
 app.listen( PORT, () => {
-	console.log( `MCP Streamable HTTP Server listening on port ${ PORT }` );
+	console.error( `MCP Streamable HTTP Server listening on port ${ PORT }` );
 } );
