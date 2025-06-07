@@ -7,9 +7,8 @@ COPY package.json package-lock.json tsconfig.json ./
 COPY src ./src
 RUN npm ci && npm run build
 
-# Default environment vars (can be overridden)
-ENV ARTICLE_PATH=/wiki
-ENV SCRIPT_PATH=/w
+# Default environment vars
+ENV PORT=8080
 
 EXPOSE 8080
 CMD ["node", "dist/streamableHttp.js"]
