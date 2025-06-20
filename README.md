@@ -120,19 +120,19 @@ Run the below command, optionally with `-e` flags to specify environment variabl
 You should end up with something like the below in your `.claude.json` config:
 
 ```json
-      "mcpServers": {
-        "mediawiki-mcp-server": {
-          "type": "stdio",
-          "command": "npx",
-          "args": [
-            "@professional-wiki/mediawiki-mcp-server@latest"
-          ],
-          "env": {
-            "WIKI_SERVER": "your.example.wiki",
-            "OAUTH_TOKEN": ""
-          }
-        }
-      },
+"mcpServers": {
+  "mediawiki-mcp-server": {
+    "type": "stdio",
+    "command": "npx",
+    "args": [
+      "@professional-wiki/mediawiki-mcp-server@latest"
+    ],
+    "env": {
+      "WIKI_SERVER": "your.example.wiki",
+      "OAUTH_TOKEN": ""
+    }
+  }
+},
 ```
 </details>
 
