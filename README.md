@@ -21,12 +21,12 @@ An MCP (Model Context Protocol) server that enables Large Language Model (LLM) c
 
 ### Environment variables
 
-| Name | Description |
-|---|---|
-| `WIKI_SERVER` | Domain of the wiki (e.g. `https://en.wikipedia.org`) |
-| `ARTICLE_PATH` | Article path of the wiki (e.g. `/wiki`) |
-| `SCRIPT_PATH` | Script path of the wiki (e.g. `/w`) |
-| `OAUTH_TOKEN` | OAuth token from the [OAuth extension](https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:OAuth) |
+| Name | Description | Default |
+|---|---|---|
+| `WIKI_SERVER` | Domain of the wiki (e.g. `https://en.wikipedia.org`) | 'https://en.wikipedia.org' |
+| `ARTICLE_PATH` | Article path of the wiki (e.g. `/wiki`) | '/wiki' |
+| `SCRIPT_PATH` | Script path of the wiki (e.g. `/w`) | '/w' |
+| `OAUTH_TOKEN` | OAuth token from the [OAuth extension](https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:OAuth) |  undefined |
 
 ## Installation
 
