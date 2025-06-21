@@ -26,7 +26,7 @@ An MCP (Model Context Protocol) server that enables Large Language Model (LLM) c
 | `WIKI_SERVER` | Domain of the wiki (e.g. `https://en.wikipedia.org`) | 'https://en.wikipedia.org' |
 | `ARTICLE_PATH` | Article path of the wiki (e.g. `/wiki`) | '/wiki' |
 | `SCRIPT_PATH` | Script path of the wiki (e.g. `/w`) | '/w' |
-| `OAUTH_TOKEN` | OAuth token from the [OAuth extension](https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:OAuth) |  undefined |
+| `OAUTH_TOKEN` | OAuth token obtained via `Special:OAuthConsumerRegistration/propose/oauth2` provided by the [OAuth extension](https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:OAuth). Select "This consumer is for use only by UserName" |  undefined |
 
 ## Installation
 
