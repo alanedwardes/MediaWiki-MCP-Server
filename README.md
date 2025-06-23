@@ -7,7 +7,7 @@ An MCP (Model Context Protocol) server that enables Large Language Model (LLM) c
 
 ### Tools
 
-> 🔐 **Requires OAuth 2.0 token:** Request from the `Special:OAuthConsumerRegistration/propose/oauth2` page on the wiki.
+> 🔐 **Requires OAuth 2.0 token in configuration:** Obtained via `Special:OAuthConsumerRegistration/propose/oauth2` provided by the [OAuth extension](https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:OAuth). Select "This consumer is for use only by UserName"
 
 | Name | Description | 
 |---|---|
@@ -20,13 +20,11 @@ An MCP (Model Context Protocol) server that enables Large Language Model (LLM) c
 | `update-page` 🔐 | Update an existing wiki page. |
 
 ### Environment variables
-
 | Name | Description | Default |
 |---|---|---|
-| `WIKI_SERVER` | Domain of the wiki (e.g. `https://en.wikipedia.org`) | 'https://en.wikipedia.org' |
-| `ARTICLE_PATH` | Article path of the wiki (e.g. `/wiki`) | '/wiki' |
-| `SCRIPT_PATH` | Script path of the wiki (e.g. `/w`) | '/w' |
-| `OAUTH_TOKEN` | OAuth token obtained via `Special:OAuthConsumerRegistration/propose/oauth2` provided by the [OAuth extension](https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:OAuth). Select "This consumer is for use only by UserName" |  undefined |
+| `CONFIG` | Path to your configuration file | `config.json` |
+| `MCP_TRANSPORT` | Type of MCP server transport (`stdio` or `http`) | `stdio` |
+| `PORT` | Port used for StreamableHTTP transport | `3000` |
 
 ## Installation
 
