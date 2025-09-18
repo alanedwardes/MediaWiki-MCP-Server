@@ -28,6 +28,9 @@
 		"type": "git",
 		"url": "git+https://github.com/ProfessionalWiki/MediaWiki-MCP-Server.git"
 	},
+	"engines": {
+		"node": ">=18"
+	},
 	"scripts": {
 		"build": "tsc",
 		"watch": "tsc --watch",
