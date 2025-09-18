@@ -79,7 +79,7 @@ export async function makeRestGetRequest<T>(
 		} );
 		return ( await response.json() ) as T;
 	} catch ( error ) {
-		// console.error('Error making API request:', error);
+		console.error( 'Error making API request:', error );
 		return null;
 	}
 }
@@ -105,7 +105,7 @@ export async function makeRestPutRequest<T>(
 		} );
 		return ( await response.json() ) as T;
 	} catch ( error ) {
-		// console.error('Error making API request:', error);
+		console.error( 'Error making API request:', error );
 		return null;
 	}
 }
@@ -131,7 +131,7 @@ export async function makeRestPostRequest<T>(
 		} );
 		return ( await response.json() ) as T;
 	} catch ( error ) {
-		// console.error('Error making API request:', error);
+		console.error( 'Error making API request:', error );
 		return null;
 	}
 }
@@ -141,7 +141,7 @@ export async function fetchPageHtml( url: string ): Promise<string | null> {
 		const response = await fetchCore( url );
 		return await response.text();
 	} catch ( error ) {
-		// console.error(`Error fetching HTML page from ${url}:`, error);
+		console.error( `Error fetching HTML page from ${ url }:`, error );
 		return null;
 	}
 }
@@ -153,7 +153,7 @@ export async function fetchImageAsBase64( url: string ): Promise<string | null> 
 		const buffer = Buffer.from( arrayBuffer );
 		return buffer.toString( 'base64' );
 	} catch ( error ) {
-		// console.error(`Error fetching image from ${url}:`, error);
+		console.error( `Error fetching image from ${ url }:`, error );
 		return null;
 	}
 }
