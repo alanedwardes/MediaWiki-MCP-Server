@@ -20,7 +20,7 @@ export function withLogging<T extends Record<string, unknown>>(
 	toolName: string,
 	handler: (args: T) => Promise<unknown>
 ) {
-	return async (args: T): Promise<unknown> => {
+	return async (args: T, extra?: unknown): Promise<unknown> => {
 		const startTime = Date.now();
 		logToolUsage(toolName, args, startTime);
 		
