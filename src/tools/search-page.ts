@@ -6,6 +6,7 @@ import type { CallToolResult, TextContent, ToolAnnotations } from '@modelcontext
 /* eslint-enable n/no-missing-import */
 import { wikiServer, articlePath } from '../common/config.js';
 import { makeRestGetRequest } from '../common/utils.js';
+import { withLogging } from '../common/logging.js';
 import type { MwRestApiSearchPageResponse, MwRestApiSearchResultObject } from '../types/mwRestApi.js';
 
 export function searchPageTool( server: McpServer ): RegisteredTool {
@@ -23,7 +24,7 @@ export function searchPageTool( server: McpServer ): RegisteredTool {
 			readOnlyHint: true,
 			destructiveHint: false
 		} as ToolAnnotations,
-		async ( { query, limit } ) => handleSearchPageTool( query, limit )
+		withLogging( 'search-page', async ( { query, limit } ) => handleSearchPageTool( query, limit ) )
 	);
 }
 

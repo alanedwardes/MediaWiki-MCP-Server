@@ -4,6 +4,7 @@ import type { McpServer, RegisteredTool } from '@modelcontextprotocol/sdk/server
 import type { CallToolResult, TextContent, ToolAnnotations } from '@modelcontextprotocol/sdk/types.js';
 /* eslint-enable n/no-missing-import */
 import { makeRestGetRequest } from '../common/utils.js';
+import { withLogging } from '../common/logging.js';
 import type { MwRestApiPageObject } from '../types/mwRestApi.js';
 
 enum ContentFormat {
@@ -25,7 +26,7 @@ export function getPageTool( server: McpServer ): RegisteredTool {
 			readOnlyHint: true,
 			destructiveHint: false
 		} as ToolAnnotations,
-		async ( { title, content } ) => handleGetPageTool( title, content )
+		withLogging( 'get-page', async ( { title, content } ) => handleGetPageTool( title, content ) )
 	);
 }
 

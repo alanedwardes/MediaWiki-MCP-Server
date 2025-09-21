@@ -4,6 +4,7 @@ import type { McpServer, RegisteredTool } from '@modelcontextprotocol/sdk/server
 import type { CallToolResult, TextContent, ToolAnnotations } from '@modelcontextprotocol/sdk/types.js';
 /* eslint-enable n/no-missing-import */
 import { makeRestGetRequest } from '../common/utils.js';
+import { withLogging } from '../common/logging.js';
 import type { MwRestApiFileObject } from '../types/mwRestApi.js';
 
 export function getFileTool( server: McpServer ): RegisteredTool {
@@ -18,7 +19,7 @@ export function getFileTool( server: McpServer ): RegisteredTool {
 			readOnlyHint: true,
 			destructiveHint: false
 		} as ToolAnnotations,
-		async ( { title } ) => handleGetFileTool( title )
+		withLogging( 'get-file', async ( { title } ) => handleGetFileTool( title ) )
 	);
 }
 

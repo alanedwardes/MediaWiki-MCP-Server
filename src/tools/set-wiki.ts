@@ -5,6 +5,7 @@ import type { CallToolResult, TextContent, ToolAnnotations } from '@modelcontext
 /* eslint-enable n/no-missing-import */
 import { updateWikiConfig, getCurrentWikiConfig, setCurrentWiki, getAllWikis, isStrictMode, isWikiAllowed } from '../common/config.js';
 import { makeApiRequest, fetchPageHtml } from '../common/utils.js';
+import { withLogging } from '../common/logging.js';
 
 const COMMON_SCRIPT_PATHS = [ '/w', '' ];
 
@@ -45,7 +46,7 @@ export function setWikiTool( server: McpServer ): RegisteredTool {
 			title: 'Set wiki',
 			destructiveHint: true
 		} as ToolAnnotations,
-		async ( args: {
+		withLogging( 'set-wiki', async ( args: {
 			wikiUrl: string;
 		} ): Promise<CallToolResult> => {
 			const url = new URL( args.wikiUrl );
@@ -106,7 +107,7 @@ export function setWikiTool( server: McpServer ): RegisteredTool {
 					error: true
 				};
 			}
-		}
+		} )
 	);
 }
 

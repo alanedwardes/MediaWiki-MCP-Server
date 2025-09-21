@@ -4,6 +4,7 @@ import type { McpServer, RegisteredTool } from '@modelcontextprotocol/sdk/server
 import type { CallToolResult, TextContent, ToolAnnotations } from '@modelcontextprotocol/sdk/types.js';
 /* eslint-enable n/no-missing-import */
 import { makeRestPostRequest, getPageUrl, formatEditComment } from '../common/utils.js';
+import { withLogging } from '../common/logging.js';
 import type { MwRestApiPageObject } from '../types/mwRestApi.js';
 
 export function createPageTool( server: McpServer ): RegisteredTool {
@@ -21,9 +22,9 @@ export function createPageTool( server: McpServer ): RegisteredTool {
 			readOnlyHint: false,
 			destructiveHint: true
 		} as ToolAnnotations,
-		async (
+		withLogging( 'create-page', async (
 			{ source, title, comment, contentModel }
-		) => handleCreatePageTool( source, title, comment, contentModel )
+		) => handleCreatePageTool( source, title, comment, contentModel ) )
 	);
 }
 
