@@ -32,10 +32,12 @@ export interface WikiConfig {
 interface Config {
 	wikis: { [key: string]: WikiConfig };
 	defaultWiki: string;
+	strictMode?: boolean;
 }
 
 const defaultConfig: Config = {
 	defaultWiki: 'en.wikipedia.org',
+	strictMode: false,
 	wikis: {
 		'en.wikipedia.org': {
 			sitename: 'Wikipedia',
@@ -116,4 +118,15 @@ export const siteName = (): string | undefined => getCurrentWikiConfig().sitenam
 
 function isTokenValid( token: string | null | undefined ): boolean {
 	return token !== undefined && token !== null && token !== '';
+}
+
+export function isStrictMode(): boolean {
+	return config.strictMode === true;
+}
+
+export function isWikiAllowed( hostname: string ): boolean {
+	if ( !isStrictMode() ) {
+		return true;
+	}
+	return config.wikis[ hostname ] !== undefined;
 }

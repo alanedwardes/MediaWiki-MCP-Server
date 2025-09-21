@@ -3,7 +3,7 @@ import { z } from 'zod';
 import type { McpServer, RegisteredTool } from '@modelcontextprotocol/sdk/server/mcp.js';
 import type { CallToolResult, TextContent, ToolAnnotations } from '@modelcontextprotocol/sdk/types.js';
 /* eslint-enable n/no-missing-import */
-import { updateWikiConfig, getCurrentWikiConfig, setCurrentWiki, getAllWikis } from '../common/config.js';
+import { updateWikiConfig, getCurrentWikiConfig, setCurrentWiki, getAllWikis, isStrictMode, isWikiAllowed } from '../common/config.js';
 import { makeApiRequest, fetchPageHtml } from '../common/utils.js';
 
 const COMMON_SCRIPT_PATHS = [ '/w', '' ];
@@ -59,6 +59,18 @@ export function setWikiTool( server: McpServer ): RegisteredTool {
 						type: 'text',
 						text: `Wiki set to ${ newConfig.sitename } (${ newConfig.server })`
 					} as TextContent ]
+				};
+			}
+
+			if ( isStrictMode() ) {
+				return {
+					content: [
+						{
+							type: 'text',
+							text: `Strict mode is enabled. Only pre-configured wikis are allowed. The wiki "${ url.hostname }" is not in the allowed list.`
+						} as TextContent
+					],
+					error: true
 				};
 			}
 

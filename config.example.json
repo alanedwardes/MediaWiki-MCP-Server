@@ -1,5 +1,6 @@
 {
   "defaultWiki": "en.wikipedia.org",
+  "strictMode": false,
   "wikis": {
     "en.wikipedia.org": {
       "sitename": "Wikipedia",
