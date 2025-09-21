@@ -3,7 +3,7 @@ import { z } from 'zod';
 import type { McpServer, RegisteredTool } from '@modelcontextprotocol/sdk/server/mcp.js';
 import type { CallToolResult, TextContent, ToolAnnotations } from '@modelcontextprotocol/sdk/types.js';
 /* eslint-enable n/no-missing-import */
-import { makeRestPutRequest, getPageUrl, formatEditComment } from '../common/utils.js';
+import { makeRestPutRequest, getPageUrl, formatEditComment, replacePrivateUrlWithPublic } from '../common/utils.js';
 import { withLogging } from '../common/logging.js';
 import type { MwRestApiPageObject } from '../types/mwRestApi.js';
 
@@ -80,7 +80,7 @@ function updatePageToolResult( result: MwRestApiPageObject ): TextContent[] {
 				`Latest revision timestamp: ${ result.latest.timestamp }`,
 				`Content model: ${ result.content_model }`,
 				`License: ${ result.license.url } ${ result.license.title }`,
-				`HTML URL: ${ result.html_url }`
+				`HTML URL: ${ result.html_url ? replacePrivateUrlWithPublic( result.html_url ) : 'Not available' }`
 			].join( '\n' )
 		}
 	];

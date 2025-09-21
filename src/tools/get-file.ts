@@ -3,7 +3,7 @@ import { z } from 'zod';
 import type { McpServer, RegisteredTool } from '@modelcontextprotocol/sdk/server/mcp.js';
 import type { CallToolResult, TextContent, ToolAnnotations } from '@modelcontextprotocol/sdk/types.js';
 /* eslint-enable n/no-missing-import */
-import { makeRestGetRequest } from '../common/utils.js';
+import { makeRestGetRequest, replacePrivateUrlWithPublic } from '../common/utils.js';
 import { withLogging } from '../common/logging.js';
 import type { MwRestApiFileObject } from '../types/mwRestApi.js';
 
@@ -56,12 +56,12 @@ function getFileToolResult( result: MwRestApiFileObject ): TextContent[] {
 			type: 'text',
 			text: [
 				`File title: ${ result.title }`,
-				`File description URL: ${ result.file_description_url }`,
+				`File description URL: ${ replacePrivateUrlWithPublic( result.file_description_url ) }`,
 				`Latest revision timestamp: ${ result.latest.timestamp }`,
 				`Latest revision user: ${ result.latest.user.name }`,
-				`Preferred URL: ${ result.preferred.url }`,
-				`Original URL: ${ result.original.url }`,
-				`Thumbnail URL: ${ result.thumbnail?.url }`
+				`Preferred URL: ${ replacePrivateUrlWithPublic( result.preferred.url ) }`,
+				`Original URL: ${ replacePrivateUrlWithPublic( result.original.url ) }`,
+				`Thumbnail URL: ${ result.thumbnail?.url ? replacePrivateUrlWithPublic( result.thumbnail.url ) : 'Not available' }`
 			].join( '\n' )
 		}
 	];

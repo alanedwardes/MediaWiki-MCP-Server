@@ -27,6 +27,11 @@ export interface WikiConfig {
 	 * $wgGroupPermissions['*']['read'] = false; in MediaWiki
 	 */
 	private?: boolean;
+	/**
+	 * Public URL to replace the private server URL in responses to the LLM.
+	 * For example, http://privatewiki:8080 can become https://wiki.example.com
+	 */
+	publicUrl?: string;
 }
 
 interface Config {
@@ -115,6 +120,7 @@ export const oauthToken = (): string | null | undefined => {
 };
 export const privateWiki = (): boolean | undefined => getCurrentWikiConfig().private;
 export const siteName = (): string | undefined => getCurrentWikiConfig().sitename;
+export const publicUrl = (): string | undefined => getCurrentWikiConfig().publicUrl;
 
 function isTokenValid( token: string | null | undefined ): boolean {
 	return token !== undefined && token !== null && token !== '';

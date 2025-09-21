@@ -1,6 +1,6 @@
 import fetch, { Response } from 'node-fetch';
 import { USER_AGENT } from '../server.js';
-import { scriptPath, wikiServer, oauthToken, articlePath, privateWiki } from './config.js';
+import { scriptPath, wikiServer, oauthToken, articlePath, privateWiki, publicUrl } from './config.js';
 
 async function fetchCore(
 	baseUrl: string,
@@ -159,7 +159,8 @@ export async function fetchImageAsBase64( url: string ): Promise<string | null> 
 }
 
 export function getPageUrl( title: string ): string {
-	return `${ wikiServer() }${ articlePath() }/${ encodeURIComponent( title ) }`;
+	const url = `${ wikiServer() }${ articlePath() }/${ encodeURIComponent( title ) }`;
+	return replacePrivateUrlWithPublic( url );
 }
 
 export function formatEditComment( tool: string, comment?: string ): string {
@@ -168,4 +169,18 @@ export function formatEditComment( tool: string, comment?: string ): string {
 		return `Automated edit ${ suffix }`;
 	}
 	return `${ comment } ${ suffix }`;
+}
+
+export function replacePrivateUrlWithPublic( url: string ): string {
+	const publicUrlValue = publicUrl();
+	if ( !publicUrlValue || !url ) {
+		return url;
+	}
+	
+	const privateServer = wikiServer();
+	if ( url.startsWith( privateServer ) ) {
+		return url.replace( privateServer, publicUrlValue );
+	}
+	
+	return url;
 }

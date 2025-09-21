@@ -16,7 +16,8 @@
       "articlepath": "/wiki",
       "scriptpath": "/w",
       "token": null,
-      "private": false
+      "private": false,
+      "publicUrl": "https://wiki.example.com"
     }
   }
 }

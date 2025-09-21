@@ -5,7 +5,7 @@ import type { McpServer, RegisteredTool } from '@modelcontextprotocol/sdk/server
 import type { CallToolResult, TextContent, ToolAnnotations } from '@modelcontextprotocol/sdk/types.js';
 /* eslint-enable n/no-missing-import */
 import { wikiServer, articlePath } from '../common/config.js';
-import { makeRestGetRequest } from '../common/utils.js';
+import { makeRestGetRequest, replacePrivateUrlWithPublic } from '../common/utils.js';
 import { withLogging } from '../common/logging.js';
 import type { MwRestApiSearchPageResponse, MwRestApiSearchResultObject } from '../types/mwRestApi.js';
 
@@ -75,8 +75,8 @@ function getSearchResultToolResult( result: MwRestApiSearchResultObject ): TextC
 			`Title: ${ result.title }`,
 			`Description: ${ result.description ?? 'Not available' }`,
 			`Page ID: ${ result.id }`,
-			`Page URL: ${ `${ wikiServer() }${ articlePath() }/${ result.key }` }`,
-			`Thumbnail URL: ${ result.thumbnail?.url ?? 'Not available' }`
+			`Page URL: ${ replacePrivateUrlWithPublic( `${ wikiServer() }${ articlePath() }/${ result.key }` ) }`,
+			`Thumbnail URL: ${ result.thumbnail?.url ? replacePrivateUrlWithPublic( result.thumbnail.url ) : 'Not available' }`
 		].join( '\n' )
 	};
 }
