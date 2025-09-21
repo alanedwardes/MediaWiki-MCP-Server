@@ -1,3 +1,5 @@
+import type { CallToolResult } from '@modelcontextprotocol/sdk/types.js';
+
 export function logToolUsage(
 	toolName: string,
 	args: Record<string, unknown>,
@@ -18,9 +20,9 @@ export function logToolUsage(
 
 export function withLogging<T extends Record<string, unknown>>(
 	toolName: string,
-	handler: (args: T) => Promise<unknown>
+	handler: (args: T) => Promise<CallToolResult>
 ) {
-	return async (args: T, extra?: unknown): Promise<unknown> => {
+	return async (args: T, extra?: unknown): Promise<CallToolResult> => {
 		const startTime = Date.now();
 		logToolUsage(toolName, args, startTime);
 		
